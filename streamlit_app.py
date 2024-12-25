@@ -118,6 +118,8 @@ cols = st.columns(2)
 
 # Loop through filtered projects and display in grid
 for idx, project in enumerate(filtered_projects):
+    # st.markdown(project['students'])
+
     col = cols[idx % 2]  # This ensures the layout wraps every 3 columns
     
     with col:
@@ -160,11 +162,10 @@ for idx, project in enumerate(filtered_projects):
                 </div>
                 ''', unsafe_allow_html=True)
             
+            
             st.markdown('')
             # Tools
-            if tools != []:
-                continue
-            else:
+            if tools == []:
                 st.markdown(
                     f'''
                     <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start;">
@@ -174,21 +175,71 @@ for idx, project in enumerate(filtered_projects):
 
             # Display students and their images in a row
             # st.write("**Students**:")
-            st.write("")
+            # st.write("")
 
-
-            # Display students and their images with LinkedIn URL or just names
             st.markdown(
                 f'''
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-start;">
-                    {"".join([
-                        f'<div style="text-align: center; font-size: 14px;">'
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-start; background: rgba(0, 128, 0, 0.5); padding: 10px; border-radius: 10px;">
+                    🚀{"|".join([ 
+                        f'<div style="font-size: 16px; margin-left: 0px;">'
                         f'{f"<a href={image_url} target=_blank>{student}</a>" if image_url else student}'
                         f'</div>'
                         for student, image_url in project["students"].items()
                     ])}
                 </div>
-                ''', unsafe_allow_html=True)
+                ''', unsafe_allow_html=True
+            )
+
+            # # Display students and their images with LinkedIn URL or just names
+            # st.markdown(
+            #     f'''
+            #     <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-start;">
+            #         {"".join([
+            #             f'<div style="text-align: center; font-size: 16px;">'
+            #             f'{f"<a href={image_url} target=_blank>{student}</a>" if image_url else student}'
+            #             f'</div>'
+            #             for student, image_url in project["students"].items()
+            #         ])}
+            #     </div>
+            #     ''', unsafe_allow_html=True)
+
+            # st.markdown(
+            #     f'''
+            #     <style>
+            #         .student-card {{
+            #             text-align: center;
+            #             font-size: 16px;
+            #             padding: 10px;
+            #             margin: 5px;
+            #             border: 1px solid #ccc;
+            #             border-radius: 8px;
+            #             background-color: #C84C05;
+            #             transition: transform 0.2s, box-shadow 0.2s;
+            #         }}
+            #         .student-card:hover {{
+            #             transform: scale(1.05);
+            #             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            #         }}
+            #         .student-container {{
+            #             display: flex;
+            #             flex-wrap: wrap;
+            #             gap: 15px;
+            #             justify-content: flex-start;
+            #         }}
+            #     </style>
+            #     <div class="student-container">
+            #         {"".join([
+            #             f'<div class="student-card">'
+            #             f'{f"<a href={image_url} target=_blank>{student}</a>" if image_url else student}'
+            #             f'</div>'
+            #             for student, image_url in project["students"].items()
+            #         ])}
+            #     </div>
+            #     ''', unsafe_allow_html=True
+            # )
+
+
+            st.write("")
 
             
             
@@ -197,7 +248,7 @@ for idx, project in enumerate(filtered_projects):
             # for student, image_url in project["students"].items():
             #     st.markdown(f"[{student}]({image_url})")
 
-            st.write("---")
+            # st.write("---")
 
 # # Optional footer
 # st.markdown("""
